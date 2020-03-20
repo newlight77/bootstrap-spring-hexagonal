@@ -20,17 +20,20 @@ dependencies {
 	implementation(project(":domain"))
 	implementation(project(":infrastructure"))
 
+	implementation ("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-security")
+
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.3.5")
-	implementation("com.okta.spring:okta-spring-boot-starter:1.4.0")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
+	implementation("org.springframework.security:spring-security-test")
 }
 
 tasks.withType<Test> {
