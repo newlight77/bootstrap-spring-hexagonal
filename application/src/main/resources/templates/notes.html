@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Notes</title>
+        <head>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        </head>
+        <script type="text/javascript">
+
+        function submitWithToken(url) {
+            var xhr = new XMLHttpRequest();
+            // This tels it to return it as a HTML document
+            xhr.responseType = "document";
+            // true on the end of here makes the call asynchronous
+            xhr.open("GET", "", true);
+            xhr.onload = function (e) {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    var csrfToken = xhr.getResponseHeader('x-csrf-token');
+                    console.log("The token is: " + csrfToken);
+                    submitForm(url, csrfToken);
+                }
+            };
+            // Make the request
+            xhr.send(null);
+        }
+
+        function submitForm(url, crsf) {
+            let form = document.forms[0];
+            var note = {
+                "title": form[0].value,
+                "text": form[1].value,
+                "author": form[2].value
+            };
+            console.log(note);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open(form.method, url, false);
+            xhr.setRequestHeader("x-csrf-token", crsf);
+            xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+            xhr.send(JSON.stringify(note));
+        }
+        </script>
+    </head>
+    <body>
+        <h1 th:inline="text">Notes for[[${#httpServletRequest.remoteUser}]]!</h1>
+
+        <tr th:if="${notes.empty}">
+            <td colspan="2"> No notes available !</td>
+        </tr>
+        <table border="1">
+            <thead>
+            <tr>
+                <th> Title</th>
+                <th> Text</th>
+                <th> Author</th>
+            </tr>
+            </thead>
+            <tr th:each="note : ${notes}">
+                <td><span th:text="${note.title}"> Title </span></td>
+                <td><span th:text="${note.text}"> Text </span></td>
+                <td><span th:text="${note.author}"> Author </span></td>
+            </tr>
+        </table>
+
+        <form method="POST" action="/api/notes" name="saveNoteForm" id="saveNoteForm">
+            <table border="1">
+                <tr>
+                    <td><p><label for="title">title:</label>
+                        <input type="text" name="title" id="title"></p></td>
+                    <td><p><label for="text">Text:</label>
+                        <input type="text" name="text" id="text"></p></td>
+                    <td><p><label for="text">Author:</label>
+                        <input type="text" name="author" id="author"></p></td>
+                </tr>
+            </table>
+            <input value="Post to API" type="button" onclick="submitWithToken('/api/notes')">
+            <input value="Directly to RestResource" type="button" onclick="submitWithToken('/rest/notes')">
+        </form>
+
+        <hr>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </body>
+</html>

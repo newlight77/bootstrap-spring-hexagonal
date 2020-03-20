@@ -1,25 +1,25 @@
 package io.github.newlight77.bootstrap.api
 
-import io.github.newlight77.bootstrap.entity.Note
-import io.github.newlight77.bootstrap.jpa.NotesRepositoryAdapter
-//import io.github.newlight77.bootstrap.model.Note
+import io.github.newlight77.bootstrap.model.NoteDomain
+import io.github.newlight77.bootstrap.model.NoteModel
+import io.github.newlight77.bootstrap.model.fromDomain
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.security.Principal
 
 @RestController
-@RequestMapping("api")
-class UserApi(val repository: NotesRepositoryAdapter) {
+@RequestMapping("api/users")
+class UserApi(val repository: NotesRepository<NoteDomain, Long>) {
 
-    @GetMapping("/user/notes")
-    fun notes(principal: Principal): List<Note> {
+    @GetMapping("/notes")
+    fun notes(principal: Principal): List<NoteModel> {
         println("Fetching notes for user: ${principal.name}")
         val notes = repository.findAllByUser(principal.name)
         return if (notes.isEmpty()) {
             listOf()
         } else {
-            notes
+            notes.map { fromDomain(it) }
         }
     }
 }

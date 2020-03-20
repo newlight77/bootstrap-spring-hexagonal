@@ -1,6 +1,7 @@
 package io.github.newlight77.bootstrap.config
 
 import org.springframework.context.annotation.Bean
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
@@ -19,6 +20,11 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
         http
             .authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
+//                .antMatchers("/api/notes").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/notes").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/notes").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET,"/rest/notes").permitAll()
+                .antMatchers(HttpMethod.POST,"/rest/notes").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
@@ -34,7 +40,8 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
             }).requiresSecure()
 
         http.csrf()
-            .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+            .disable();
+//            .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
         //@formatter:on
     }
 
@@ -43,7 +50,7 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
         val user: UserDetails = User.withDefaultPasswordEncoder()
                 .username("user")
                 .password("password")
-                .roles("USER")
+                .roles("ADMIN")
                 .build()
         return InMemoryUserDetailsManager(user)
     }
