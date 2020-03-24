@@ -16,5 +16,4 @@ class NoteService(private var repository: INoteRepository<NoteDomain, Long>) : I
     override fun findAllByUser(name: String): List<NoteDomain> {
         return repository.findAllByUser(name)
     }
-
 }

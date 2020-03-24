@@ -18,6 +18,7 @@ repositories {
 
 dependencies {
 	implementation(project(":domain"))
+	implementation(project(":application"))
 
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.2.5.RELEASE")
 	implementation("org.springframework.boot:spring-boot-starter-data-rest:2.2.5.RELEASE")

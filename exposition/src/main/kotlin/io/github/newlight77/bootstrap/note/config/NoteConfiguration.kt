@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class NoteConfiguration {
-
     @Bean
     fun noteService(repository: INoteRepository<NoteDomain, Long>): INoteService<NoteDomain, Long> {
         return NoteService(repository)
