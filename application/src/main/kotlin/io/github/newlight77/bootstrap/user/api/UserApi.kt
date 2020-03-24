@@ -1,16 +1,17 @@
-package io.github.newlight77.bootstrap.api
+package io.github.newlight77.bootstrap.user.api
 
-import io.github.newlight77.bootstrap.model.NoteDomain
-import io.github.newlight77.bootstrap.model.NoteModel
-import io.github.newlight77.bootstrap.model.fromDomain
+import io.github.newlight77.bootstrap.note.api.INoteRepository
+import io.github.newlight77.bootstrap.note.model.NoteDomain
+import io.github.newlight77.bootstrap.note.model.NoteModel
+import io.github.newlight77.bootstrap.note.model.fromDomain
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.security.Principal
 
 @RestController
-@RequestMapping("api/users")
-class UserApi(val repository: NotesRepository<NoteDomain, Long>) {
+@RequestMapping("users")
+class UserApi(val repository: INoteRepository<NoteDomain, Long>) {
 
     @GetMapping("/notes")
     fun notes(principal: Principal): List<NoteModel> {

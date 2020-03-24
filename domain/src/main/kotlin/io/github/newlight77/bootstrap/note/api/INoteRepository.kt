@@ -1,6 +1,6 @@
-package io.github.newlight77.bootstrap.api
+package io.github.newlight77.bootstrap.note.api
 
-interface NotesRepository<T, U> {
+interface INoteRepository<T, U> {
     fun save(note: T)
     fun findAll(): List<T>
     fun findAllByUser(name: String): List<T>

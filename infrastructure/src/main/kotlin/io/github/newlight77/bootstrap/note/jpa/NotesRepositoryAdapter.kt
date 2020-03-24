@@ -1,13 +1,13 @@
-package io.github.newlight77.bootstrap.jpa
+package io.github.newlight77.bootstrap.note.jpa
 
-import io.github.newlight77.bootstrap.api.NotesRepository
-import io.github.newlight77.bootstrap.entity.fromDomain
-import io.github.newlight77.bootstrap.model.NoteDomain
-import io.github.newlight77.bootstrap.entity.toDomain
+import io.github.newlight77.bootstrap.note.api.INoteRepository
+import io.github.newlight77.bootstrap.note.entity.fromDomain
+import io.github.newlight77.bootstrap.note.model.NoteDomain
+import io.github.newlight77.bootstrap.note.entity.toDomain
 import org.springframework.stereotype.Repository
 
 @Repository
-class NotesRepositoryAdapter(private var notesJpaRepository: NotesJpaRepository) : NotesRepository<NoteDomain, Long> {
+class NotesRepositoryAdapter(private var notesJpaRepository: NotesJpaRepository) : INoteRepository<NoteDomain, Long> {
     override fun save(note: NoteDomain) {
         println(note)
         notesJpaRepository.save(fromDomain(note))

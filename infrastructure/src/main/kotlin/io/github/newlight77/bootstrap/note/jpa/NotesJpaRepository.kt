@@ -1,6 +1,6 @@
-package io.github.newlight77.bootstrap.jpa
+package io.github.newlight77.bootstrap.note.jpa
 
-import io.github.newlight77.bootstrap.entity.NoteEntity
+import io.github.newlight77.bootstrap.note.entity.NoteEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.rest.core.annotation.RepositoryRestResource
 
