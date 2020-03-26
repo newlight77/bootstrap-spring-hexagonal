@@ -4,6 +4,7 @@ import io.github.newlight77.bootstrap.note.model.NoteDomain
 import io.github.newlight77.bootstrap.note.model.NoteModel
 import io.github.newlight77.bootstrap.note.model.fromDomain
 import io.github.newlight77.bootstrap.note.model.toDomain
+import io.github.newlight77.bootstrap.note.service.INoteService
 import org.springframework.stereotype.Service
 
 @Service

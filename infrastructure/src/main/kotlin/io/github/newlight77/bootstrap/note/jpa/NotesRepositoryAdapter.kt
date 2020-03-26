@@ -1,6 +1,6 @@
 package io.github.newlight77.bootstrap.note.jpa
 
-import io.github.newlight77.bootstrap.note.api.INoteRepository
+import io.github.newlight77.bootstrap.note.port.INoteRepository
 import io.github.newlight77.bootstrap.note.entity.fromDomain
 import io.github.newlight77.bootstrap.note.model.NoteDomain
 import io.github.newlight77.bootstrap.note.entity.toDomain

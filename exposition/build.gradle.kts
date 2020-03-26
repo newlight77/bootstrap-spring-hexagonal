@@ -17,7 +17,6 @@ repositories {
 }
 
 dependencies {
-	implementation(project(":application"))
 	implementation(project(":domain"))
 	implementation(project(":infrastructure"))
 
@@ -34,7 +33,10 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
+
 	implementation("org.springframework.security:spring-security-test")
+
+	runtimeOnly("com.h2database:h2")
 }
 
 tasks.withType<Test> {

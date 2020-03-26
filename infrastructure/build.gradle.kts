@@ -18,10 +18,10 @@ repositories {
 
 dependencies {
 	implementation(project(":domain"))
-	implementation(project(":application"))
 
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.2.5.RELEASE")
 	implementation("org.springframework.boot:spring-boot-starter-data-rest:2.2.5.RELEASE")
+
 	implementation("org.jetbrains.kotlin:kotlin-reflect:1.3.70")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.70")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
@@ -30,8 +30,6 @@ dependencies {
 	testImplementation("org.junit.jupiter:junit-jupiter:5.6.0")
 	testImplementation("org.mockito:mockito-junit-jupiter:3.3.0")
 	testImplementation("org.assertj:assertj-core:3.11.1")
-
-	runtimeOnly("com.h2database:h2")
 }
 
 tasks.withType<Test> {

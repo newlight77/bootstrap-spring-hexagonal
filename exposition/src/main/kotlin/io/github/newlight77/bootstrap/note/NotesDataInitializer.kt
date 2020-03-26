@@ -1,6 +1,6 @@
-package io.github.newlight77.bootstrap
+package io.github.newlight77.bootstrap.note
 
-import io.github.newlight77.bootstrap.note.api.INoteRepository
+import io.github.newlight77.bootstrap.note.port.INoteRepository
 import io.github.newlight77.bootstrap.note.model.NoteDomain
 import io.github.newlight77.bootstrap.note.model.NoteModel
 import io.github.newlight77.bootstrap.note.model.toDomain
@@ -14,6 +14,7 @@ class DataInitializer(val repository: INoteRepository<NoteDomain, Long>) : Appli
     override fun run(args: ApplicationArguments) {
         modelData().map { toDomain(it) }
               .forEach() {
+                  println("creating note : " + it.title)
             repository.save(it)
         }
         repository.findAll().forEach { println(it) }

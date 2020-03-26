@@ -1,7 +1,7 @@
 package io.github.newlight77.bootstrap.note.service
 
-import io.github.newlight77.bootstrap.note.api.INoteRepository
-import io.github.newlight77.bootstrap.note.api.INoteService
+import io.github.newlight77.bootstrap.note.port.INoteRepository
+import io.github.newlight77.bootstrap.note.service.INoteService
 import io.github.newlight77.bootstrap.note.model.NoteDomain
 
 class NoteService(private var repository: INoteRepository<NoteDomain, Long>) : INoteService<NoteDomain, Long> {
