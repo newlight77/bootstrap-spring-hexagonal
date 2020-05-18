@@ -1,4 +1,4 @@
-package io.github.newlight77.bootstrap.note.model
+package io.github.newlight77.bootstrap.note
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 

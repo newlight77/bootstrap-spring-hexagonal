@@ -1,9 +1,5 @@
 package io.github.newlight77.bootstrap.note
 
-import io.github.newlight77.bootstrap.note.port.INoteRepository
-import io.github.newlight77.bootstrap.note.model.NoteDomain
-import io.github.newlight77.bootstrap.note.model.NoteModel
-import io.github.newlight77.bootstrap.note.model.toDomain
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
 import org.springframework.stereotype.Component
@@ -12,7 +8,7 @@ import org.springframework.stereotype.Component
 class DataInitializer(val repository: INoteRepository<NoteDomain, Long>) : ApplicationRunner {
     @Throws(Exception::class)
     override fun run(args: ApplicationArguments) {
-        modelData().map { toDomain(it) }
+        modelData().map { fromModel(it) }
               .forEach() {
                   println("creating note : " + it.title)
             repository.save(it)

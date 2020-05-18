@@ -1,6 +1,5 @@
-package io.github.newlight77.bootstrap.note.repository
+package io.github.newlight77.bootstrap.note
 
-import io.github.newlight77.bootstrap.note.entity.NoteEntity
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler
 import org.springframework.stereotype.Component
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Component
 class NoteEntityEventHandler {
     @HandleBeforeCreate
     fun handleCreate(note: NoteEntity) {
-        println("event handling before creating note entity through the annotated @RepositoryRestResource : $note")
+        println("event handling before creating note entity through the annotated @RepositoryEventHandler : $note")
         note.user = "temporary"
     }
 }
